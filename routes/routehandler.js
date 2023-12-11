@@ -347,11 +347,12 @@ export const poster_add = async (req, res) => {
 
 export const add_data = async (req, res) => {
     const pusher = new Pusher({
-        appId: '1710273',
-        key: 'ff0fc3f0096af6ab8a90',
-        secret: '0e0830285b87499f5085',
+        appId: '1722935',
+        key: '1566e3b3df0452142fc3',
+        secret: 'fb6f3674046b57057bfb',
         cluster: 'ap2',
         useTLS: true,
+       
       });
 
 
