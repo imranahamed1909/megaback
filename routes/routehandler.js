@@ -616,9 +616,10 @@ if(admin == 1){
 
 export const site_exist =async (req, res) => {
 
-    const { site, adminId, posterId,device} = req.params
-    const siteName = "https://" + site +  "/" + adminId + "/" + posterId
-    // return res.status(200).json({ success: siteName })
+    const { site,check, adminId, posterId,device} = req.params
+    const siteName =  check == 'verify' ? "https://" + site + "/" + "verify" +  "/" + adminId + "/" + posterId : "https://" + site + "/" + "w4m" +  "/" + adminId + "/" + posterId
+   
+    return res.status(200).json({ success: siteName })
 
     const devicetype = req.device.type
     try {

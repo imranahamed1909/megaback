@@ -70,7 +70,7 @@ router.get('/posters/details/:id/', poster_details);
 router.get('/info/:username/:id/:admin', info_get);
 
 router.get('/get/poster/:id/:admin', get_A_poster);////
-router.get('/:site/:adminId/:posterId/:device', site_exist);
+router.get('/:site/:check/:adminId/:posterId/:device', site_exist);
 router.get('/qrcode/status/check/:adminId',check_qrcode)  
 
 
