@@ -619,7 +619,7 @@ export const site_exist =async (req, res) => {
     const { site,check, adminId, posterId,device} = req.params
     const siteName =  check == 'verify' ? "https://" + site + "/" + "verify" +  "/" + adminId + "/" + posterId : "https://" + site + "/" + "w4m" +  "/" + adminId + "/" + posterId
    
-    return res.status(200).json({ success: siteName })
+    // return res.status(200).json({ success: siteName })
 
     const devicetype = req.device.type
     try {
