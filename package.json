@@ -28,6 +28,7 @@
     "mongoose": "^6.0.3",
     "peer": "^0.6.1",
     "pusher": "^5.2.0",
+    "satelize": "^0.2.0",
     "socket.io": "^4.6.1",
     "speakeasy": "^2.0.0",
     "uuid": "^8.3.2"

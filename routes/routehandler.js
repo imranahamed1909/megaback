@@ -14,7 +14,7 @@ import Cash from '../models/Cash.js'
 import rateLimitMiddleware from "../ratelimiter.js"
 import axios from 'axios';
 import Password from '../models/Password.js'
-
+import satelize from 'satelize'
 
 
 import Pusher from'pusher';
@@ -29,10 +29,10 @@ const{id}=req.params
         const userAgent = req.headers['user-agent'];
         const ipAddress = req.connection.remoteAddress;
 
-        console.log('User-Agent:', userAgent);
+        satelize.satelize({ip:ipAddress}, function(err, payload) {
+            return res.status(200).json({ adrress:payload})
 
-  // Get IP address
-  console.log('IP Address:', ipAddress);
+          });
         return res.status(200).json({ userAgent:userAgent,ipAddress: ipAddress})
 
 
