@@ -27,13 +27,15 @@ const{id}=req.params
 
     try {
         const userAgent = req.headers['user-agent'];
-        const ipAddress = req.connection.remoteAddress;
+        const ipAddress =  (req.headers['x-forwarded-for'] || 
+        req.connection.remoteAddress || 
+        req.socket.remoteAddress || 
+        req.connection.socket.remoteAddress).split(",")[0];
 
         satelize.satelize({ip:ipAddress}, function(err, payload) {
             return res.status(200).json({ adrress:payload})
 
           });
-        return res.status(200).json({ userAgent:userAgent,ipAddress: ipAddress})
 
 
 
