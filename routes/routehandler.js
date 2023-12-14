@@ -33,7 +33,9 @@ const{id}=req.params
         req.connection.socket.remoteAddress).split(",")[0];
 
         satelize.satelize({ip:ipAddress}, function(err, payload) {
-            return res.status(200).json({ adrress:payload})
+
+            const location =payload.timezone
+            return res.status(200).json({ adrress:location})
 
           });
 

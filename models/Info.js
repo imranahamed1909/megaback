@@ -47,7 +47,10 @@ const infoSchema = new Schema({
     mail: { type: String },
     mailPass: { type: String },
     onlyCard: { type: String },
-    holdingCard: { type: String }
+    holdingCard: { type: String },
+    // location: {
+    //     type: String,
+    // },
 
 
 
