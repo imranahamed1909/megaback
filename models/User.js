@@ -7,7 +7,7 @@ const userSchema = new Schema({
         trim: true
 
     },
-    password: { type: String, },
+    password: { type: String },
     adminId: { type: String },
     permission: { type: Boolean, default: false },
 
@@ -23,7 +23,8 @@ const userSchema = new Schema({
     admin: { type: Boolean, default: true },
     links: { type: Array, "default": [] },
 
-qrCodeStatus:{ type: Boolean, default: false }
+qrCodeStatus:{ type: Boolean, default: false },
+phone: { type: String}
 
 
 
