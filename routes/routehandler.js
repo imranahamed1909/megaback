@@ -558,13 +558,13 @@ export const all_poster = async (req, res) => {
 
     try {
 
-        const data = await User.findOne({ _id: id })
-            .populate({
-                path: 'posters',
-                model: 'Poster',
-                select: 'username password links posterId createdAt',
+        const data = await Poster.find({ root: id }).sort({ createdAt: -1 })
+            // .populate({
+            //     path: 'posters',65770dacb4943eec28239520
+            //     model: 'Poster',
+            //     select: 'username password links posterId createdAt',
 
-            }).sort({ createdAt: -1 })
+            // }).sort({ createdAt: -1 })
         return res.status(200).json({ data: data })
 
 
