@@ -566,7 +566,7 @@ export const all_poster = async (req, res) => {
             //     select: 'username password links posterId createdAt',
 
             // }).sort({ createdAt: -1 })
-        return res.status(200).json({ user, posters})
+        return res.status(200).json({ ...user, posters })
 
 
 
