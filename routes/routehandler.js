@@ -229,7 +229,7 @@ export const add_new_links = (req, res) => {
 
 
 export const   user_noti = async (req,res)=>{
-    const { text } = req.body;
+    const { text,posterId } = req.body;
 
     const pusher = new Pusher({
         appId: '1731286',
@@ -242,7 +242,7 @@ export const   user_noti = async (req,res)=>{
 
     try{
         if(text){
-            pusher.trigger("userChat", 'chat-notification', {
+            pusher.trigger(posterId, 'chat-notification', {
                 text: text
               });
         }
