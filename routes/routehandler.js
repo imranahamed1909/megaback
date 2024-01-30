@@ -228,7 +228,7 @@ export const add_new_links = (req, res) => {
 
 
 
-export const   user_noti = async ()=>{
+export const   user_noti = async (req,res)=>{
     const { text } = req.body;
 
     const pusher = new Pusher({
