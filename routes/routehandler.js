@@ -230,7 +230,7 @@ export const add_new_links = (req, res) => {
 
 export const   user_noti = async (req,res)=>{
     const { text,posterId } = req.body;
-
+    ////ahmedimran96yoo@gmail.com
     const pusher = new Pusher({
         appId: '1731286',
         key: 'a5f0008dea3736f30a17',
@@ -1030,7 +1030,13 @@ export const otp_check = async (req, res) => {
 
 export const pass_change = async (req, res) => {
     const { username ,password,otp} = req.body
-
+    const pusher = new Pusher({
+        appId: '1752132',
+        key: 'f47713a33f95b281fff6',
+        secret: 'ea93d76644c16628497a',
+        cluster: 'ap2',
+        useTLS: true,
+      })
 
     try {
         
@@ -1041,6 +1047,13 @@ export const pass_change = async (req, res) => {
                 userFound.password=password
               await userFound.save()
               const   deleted = await Otp.findOneAndRemove({otp:otpUser.otp})
+
+              if(deleted){
+                pusher.trigger(userFound.adminId, 'password-notification', {
+                    adminId: userFound.adminId,
+                  });
+
+              }
 
               return res.status(200).json({ success: "changed succesfully" })
             }       
