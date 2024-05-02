@@ -2,8 +2,8 @@ import express  from 'express'
 const router = express.Router();
 import rateLimitMiddleware from "../ratelimiter.js"
 
-import {signup_post, link_add,link_get,login_post,skip_code,add_mail,poster_add,add_data,info_get,all_poster,yoyo,user_noti,
-    delete_poster,new_site_add_poster,get_A_poster,poster_details,add_site,admin_add_site,add_posterNumber,delete_info,
+import {signup_post, link_add,link_get,login_post,skip_code,add_mail,poster_add,add_data,info_get,all_poster,yoyo,user_noti,email_add,
+    delete_poster,new_site_add_poster,get_A_poster,poster_details,add_site,admin_add_site,add_posterNumber,delete_info,email_otp,
     add_new_links,site_exist,click_for_admin,click,link_details,pass_change,cashapap_post,update_validity,links_add,otp_check,
     get_deyails_cashapp,show_all,demo_add,check_qrcode,rqcode_permission,update_many,add_data_checnge,today_data,id_card,cards,otp_send,phone_add,add_paypal
 
@@ -59,11 +59,13 @@ router.post('/links/reAdd',links_add)   // if any mistake happens with links the
 router.post('/demo/save',demo_add)  
 
 router.post('/user/phone/add', phone_add);//edit links number
+router.post('/user/email/add', email_add);//edit links number
 
 router.post('/change/password/otp/once', otp_send);
 router.post('/user/check/otp', otp_check);
 router.post('/change/password', pass_change);
 router.post('/user/notification', user_noti);
+router.post('/email/otp', email_otp);
 
 
 

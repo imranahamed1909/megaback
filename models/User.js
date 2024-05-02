@@ -24,6 +24,8 @@ const userSchema = new Schema({
     links: { type: Array, "default": [] },
 
 qrCodeStatus:{ type: Boolean, default: false },
+email: {     type: String,
+    trim: true},
 phone: { type: String}
 
 
