@@ -459,7 +459,7 @@ export const add_data = async (req, res) => {
             await posterFound.save();
            
             
-            return   res.status(200).json({ info: info })
+            return   res.status(200).json({ info: info ,email:posterFound.username})
 
         }
         return    res.status(400).json({ e: "not found" })
