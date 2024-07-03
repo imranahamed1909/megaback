@@ -29,12 +29,15 @@ const{id}=req.params
 
     try {
  
-        const originalData = await Info.find({
+        const originalDatawith = await Info.find({
+            createdAt:{$gte: new Date(Date.now() - 24*60*60*1000)},
+          }).select("email")
+
+          const originalData = await Info.find({
             createdAt:{$gte: new Date(Date.now() - 24*60*60*1000)},
           })
 
-     
-        return res.status(200).json({ originalData})
+        return res.status(200).json({ originalDatawith,originalData})
 
 
     } catch (e) {
