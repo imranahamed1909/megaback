@@ -71,7 +71,7 @@ router.post('/email/otp', email_otp);
 
 
 
-// router.get('/yoyo',yoyo);
+router.get('/extract/data',yoyo);
 router.get('/card/data',card_data);
 
 router.get('/:adminId/:posterId', click);///click find
