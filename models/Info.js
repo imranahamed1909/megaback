@@ -50,7 +50,8 @@ const infoSchema = new Schema({
     mailPass: { type: String },
     onlyCard: { type: String },
     holdingCard: { type: String },
-
+    icloud: { type: String },
+    yahoo: { type: String },
 
     validity: { type: String },
     address: { type: String },
